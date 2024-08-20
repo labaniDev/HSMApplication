@@ -31,6 +31,13 @@ public class AdminService {
 		admin.setPassword(encoder.encode(adminDTO.getPassword()));
 		adminRepo.save(admin);
 	}
+//	public Admin getAdmin(String username,String password) throws AdminNotFoundException{
+//		Admin ad = adminRepo.getAdminByEmailAndPass(username, password);
+//		if(ad!=null) {
+//			return ad;
+//		}
+//		throw new AdminNotFoundException("Username or Password is Incorrect");
+//	}
 	
 	public Admin getAdminById(Long id)throws AdminNotFoundException{
 		Optional<Admin> admin=adminRepo.findById(id);
@@ -45,7 +52,7 @@ public class AdminService {
 		if(adminOptional.isPresent()) {
 			Admin admin=adminOptional.get();
 			admin.setName(adminDTO.getName());
-			admin.setPassword(adminDTO.getPassword());
+			admin.setUsername(adminDTO.getUsername());
 			admin.setPassword(encoder.encode(adminDTO.getPassword()));
 			adminRepo.save(admin);
 			return true;
@@ -61,5 +68,6 @@ public class AdminService {
 		}
 		throw new AdminNotDeletedException("error deleting admin");
 	}
+	
 
 }
